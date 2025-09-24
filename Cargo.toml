@@ -13,9 +13,9 @@ repository = "https://github.com/linebender/vello"
 bump_estimate = []
 
 [dependencies]
-blitz-text = { git = "https://github.com/cyrup-ai/blitz", branch = "main" }
-wgpu = { git = "https://github.com/cyrup-ai/wgpu", branch = "main" }
-glyphon = { git = "https://github.com/cyrup-ai/glyphon", branch = "main" }
+blitz-text = { git = "https://github.com/cyrup-ai/blitz", branch = "main", package = "blitz-text" }
+wgpu = { git = "https://github.com/cyrup-ai/wgpu", branch = "main", package = "wgpu" }
+glyphon = { git = "https://github.com/cyrup-ai/glyphon", branch = "main", package = "glyphon" }
 ttf-parser = "0.25.1"
 half = "2.6.0"
 dashmap = "6.1.0"
