@@ -1,0 +1,39 @@
+[package]
+name = "vello_encoding"
+version = "0.5.0"
+description = "Vello types that represent the data that needs to be rendered."
+categories = [ "rendering", "graphics",]
+keywords = [ "2d", "vector-graphics",]
+edition = "2024"
+rust-version = "1.85.0"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/linebender/vello"
+
+[features]
+bump_estimate = []
+
+[dependencies]
+blitz-text = { path = "../blitz/packages/blitz-text" }
+wgpu = { path = "../wgpu/wgpu" }
+glyphon = { path = "../glyphon" }
+ttf-parser = "0.25.1"
+half = "2.6.0"
+dashmap = "6.1.0"
+
+[dependencies.bytemuck]
+version = "1.23.2"
+features = [ "derive",]
+
+[dependencies.peniko]
+version = "0.4.1"
+default-features = true
+
+[dependencies.guillotiere]
+version = "0.6.2"
+
+
+
+[package.metadata.docs.rs]
+all-features = true
+default-target = "x86_64-unknown-linux-gnu"
+targets = []
