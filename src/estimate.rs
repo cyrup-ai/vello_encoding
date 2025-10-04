@@ -176,8 +176,8 @@ impl BumpEstimator {
         // Calculate GPU buffer estimates for stroke paths (higher cost due to double processing)
         let total_stroke_elements = 2 * (lineto_lines + curve_count) + caps + joins;
         self.binning_buffer_size += (total_stroke_elements as f64 * scale).ceil() as u32;
-        self.ptcl_buffer_size += (2 * segments as f64 * 1.5 * scale).ceil() as u32; // Strokes generate more path-tile commands
-        self.tile_buffer_size += (2 * segments as f64 * 0.75 * scale).ceil() as u32; // Double tile rendering for stroke outlines
+        self.ptcl_buffer_size += (2.0 * segments as f64 * 1.5 * scale).ceil() as u32; // Strokes generate more path-tile commands
+        self.tile_buffer_size += (2.0 * segments as f64 * 0.75 * scale).ceil() as u32; // Double tile rendering for stroke outlines
     }
 
     /// Produce the final total, applying an optional transform to all content.
