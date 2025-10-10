@@ -167,7 +167,7 @@ impl GlyphCache {
     /// * `size` - Font size in pixels
     /// * `style` - Font style configuration
     /// * `text` - The text to render
-    pub(crate) fn session<'a>(
+    pub(crate) async fn session<'a>(
         &'a mut self,
         font: &'a Font,
         size: f32,
@@ -197,8 +197,8 @@ impl GlyphCache {
                 self.format,
                 wgpu::MultisampleState::default(),
                 None,
-            )?;
-            let measurement = text_system.measure_text(text, attrs, None, None)?;
+            ).await?;
+            let measurement = text_system.measure_text(text, attrs, None, None).await?;
 
             // Create prepared text for rendering
             let buffer = Buffer::new(&mut FontSystem::new(), Metrics::relative(size, 1.0));

@@ -189,7 +189,7 @@ impl Resolver {
 
     /// Resolves late bound resources and packs an encoding. Returns the packed
     /// layout and computed ramp data.
-    pub fn resolve<'a>(
+    pub async fn resolve<'a>(
         &'a mut self,
         encoding: &Encoding,
         packed: &mut Vec<u8>,
@@ -199,7 +199,7 @@ impl Resolver {
             let layout = resolve_solid_paths_only(encoding, packed);
             return (layout, Ramps::default(), Images::default());
         }
-        let patch_sizes = self.resolve_patches(encoding);
+        let patch_sizes = self.resolve_patches(encoding).await;
         self.resolve_pending_images();
         let data = packed;
         data.clear();
@@ -429,7 +429,7 @@ impl Resolver {
         (layout, self.ramp_cache.ramps(), self.image_cache.images())
     }
 
-    fn resolve_patches(&mut self, encoding: &Encoding) -> StreamOffsets {
+    async fn resolve_patches(&mut self, encoding: &Encoding) -> StreamOffsets {
         self.ramp_cache.maintain();
         self.glyphs.clear();
         self.glyph_cache.maintain();
@@ -492,6 +492,7 @@ impl Resolver {
                     let mut session = match self
                         .glyph_cache
                         .session(&run.font, font_size, &run.style, &text)
+                        .await
                     {
                         Ok(session) => session,
                         Err(_) => continue,
